@@ -3,7 +3,7 @@ import React, {Component} from "react";
 class QuestionBox extends Component {
     state = {
         options: this.props.options,
-        anwwer: ""
+        answer: ""
     }
 
     setAnswer = (answer) => {
@@ -18,7 +18,7 @@ class QuestionBox extends Component {
             <div className="questionBox">
                 <div className="question">{this.props.question}</div>
                 {this.state.options.map((option, index) => (
-                    <button className="answerBtn" onClick={ () => this.setAnswer(option) }> 
+                    <button key={index} className="answerBtn" onClick={ () => { this.setAnswer(option); this.props.onSelection(option) }}> 
                         {option} 
                     </button> 
                 ))}
