@@ -47,7 +47,9 @@ class QuizBee extends Component {
     render() {
         return (
         <div className="container">
-            <div className="title">QuizBee</div>
+            <div className="title">QuizBee 
+                <button className="resetBtn" onClick={this.resetGame}>Reset</button>
+            </div>
             { this.state.questionBank.length > 0 
             && this.state.attemptCount < 5 
             && this.state.questionBank.map(

@@ -86,3 +86,16 @@
   outline: none;
   cursor: pointer;
 }
+
+.resetBtn {
+  position: relative;
+  padding: 10px;
+  background-color: rgb(178, 231, 91);
+  border: none;
+  /* font-size: 1em; */
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
