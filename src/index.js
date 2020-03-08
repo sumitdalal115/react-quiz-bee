@@ -13,6 +13,7 @@ class QuizBee extends Component {
     };
 
     getQuestions = () => {
+        console.log('QuizBee: fetching questions')
         quizService().then(questions => {
             this.setState({
                 questionBank : questions
@@ -32,7 +33,8 @@ class QuizBee extends Component {
         });
     };
 
-    resetGame = () => {
+    resetGame = () => {        
+        console.log('QuizBee: resetting game')
         this.setState({
             score: 0,
             attemptCount: 0
@@ -51,7 +53,10 @@ class QuizBee extends Component {
                 <button className="resetBtn" onClick={this.resetGame}>Reset</button>
             </div>
             {
-               // console.log('running h4, ques : ' + question + ', options : ' + answers.length )
+               console.log('\n')
+            }
+            {
+               console.log('running h4**********************************************************')
             }
             { this.state.questionBank.length > 0 
             && this.state.attemptCount < 5 

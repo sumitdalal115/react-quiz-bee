@@ -7,6 +7,7 @@ class QuestionBox extends Component {
     }
 
     setAnswer = (answer) => {
+        console.log('im setting answer')
         this.setState({
             options: [answer],
             answer: answer
