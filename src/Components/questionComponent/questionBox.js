@@ -14,17 +14,6 @@ class QuestionBox extends Component {
         });
     }
 
-    resetOptions = () => {
-        this.setState({
-            options: this.props.options,
-            answer: ''
-        });
-    }
-
-    componentDidMount = () => {
-        this.resetOptions();
-    }
-
     render(){
         return (
             <div className="questionBox">

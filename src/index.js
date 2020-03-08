@@ -10,7 +10,7 @@ class QuizBee extends Component {
         questionBank: [],
         score: 0,
         attemptCount : 0
-    };
+    }
 
     getQuestions = () => {
         console.log('QuizBee: fetching questions')
@@ -19,7 +19,7 @@ class QuizBee extends Component {
                 questionBank : questions
             });
         });
-    };
+    }
 
     computeAnswer = (answer, correct) => {
         let score = this.state.score;
@@ -31,20 +31,26 @@ class QuizBee extends Component {
             score: score,
             attemptCount: ++attemptCount
         });
-    };
+    }
 
     resetGame = () => {        
         console.log('QuizBee: resetting game')
         this.setState({
             score: 0,
-            attemptCount: 0
+            attemptCount: 0,
+            questionBank:[]
         });
         this.getQuestions();
-    };
+    }
 
     componentDidMount() {
+        console.log('QuizBee: componentDidMount*******')
         this.getQuestions();
-    };
+    }
+
+    componentDidUpdate() {
+        console.log('QuizBee: componentDidUpdate*******')
+    }
 
     render() {
         return (
