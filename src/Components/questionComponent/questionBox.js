@@ -17,11 +17,18 @@ class QuestionBox extends Component {
         return (
             <div className="questionBox">
                 <div className="question">{this.props.question}</div>
-                {this.state.options.map((option, index) => (
-                    <button key={index} className="answerBtn" onClick={ () => { this.setAnswer(option); this.props.onSelection(option) }}> 
-                        {option} 
-                    </button> 
-                ))}
+                {
+                    console.log('running box, ques : ' + this.props.question 
+                    + ', prop options : ' + this.props.options.length 
+                    + ', state options : ' + this.state.options.length  )
+                }
+                {
+                    this.state.options.map((option, index) => (
+                        <button key={index} className="answerBtn" onClick={ () => { this.setAnswer(option); this.props.onSelection(option) }}> 
+                            {option} 
+                        </button> 
+                    ))
+                }
             </div>
         );
     }
