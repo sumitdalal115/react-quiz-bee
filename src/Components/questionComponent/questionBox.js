@@ -3,7 +3,7 @@ import React, {Component} from "react";
 class QuestionBox extends Component {
     state = {
         options: this.props.options,
-        answer: ""
+        answer: ''
     }
 
     setAnswer = (answer) => {
@@ -12,6 +12,17 @@ class QuestionBox extends Component {
             options: [answer],
             answer: answer
         });
+    }
+
+    resetOptions = () => {
+        this.setState({
+            options: this.props.options,
+            answer: ''
+        });
+    }
+
+    componentDidMount = () => {
+        this.resetOptions();
     }
 
     render(){
