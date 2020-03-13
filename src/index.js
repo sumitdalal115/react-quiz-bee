@@ -13,7 +13,7 @@ class QuizBee extends Component {
     }
 
     getQuestions = () => {
-        console.log('QuizBee: fetching questions')
+        console.log('QuizBee: fetching questions');
         quizService().then(questions => {
             this.setState({
                 questionBank : questions
@@ -34,7 +34,7 @@ class QuizBee extends Component {
     }
 
     resetGame = () => {        
-        console.log('QuizBee: resetting game')
+        console.log('QuizBee: resetting game');
         this.setState({
             score: 0,
             attemptCount: 0,
@@ -44,12 +44,12 @@ class QuizBee extends Component {
     }
 
     componentDidMount() {
-        console.log('QuizBee: componentDidMount*******')
+        console.log('QuizBee: componentDidMount*******');
         this.getQuestions();
     }
 
     componentDidUpdate() {
-        console.log('QuizBee: componentDidUpdate*******')
+        console.log('QuizBee: componentDidUpdate*******');
     }
 
     render() {
@@ -59,6 +59,7 @@ class QuizBee extends Component {
                 <button className="resetBtn" onClick={this.resetGame}>Reset</button>
             </div>
             {
+               // instead use react dev tools - profiler tab
                console.log('\n')
             }
             {
@@ -68,13 +69,11 @@ class QuizBee extends Component {
             && this.state.attemptCount < 5 
             && this.state.questionBank.map(
                 ({question, answers, correct, questionId}) => 
-                <h4 key={questionId}> 
                     <QuestionBox question={question} 
                         options={answers} 
                         correct={correct} 
                         key={questionId} 
                         onSelection= {answer => this.computeAnswer(answer, correct)} /> 
-                </h4>
             )}
             {
                 this.state.attemptCount === 5 && <ResultBox score={this.state.score} reset={this.resetGame} />
