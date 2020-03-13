@@ -7,13 +7,11 @@ class QuestionBox extends Component {
     }
 
     setAnswer = (answer) => {
-        if(this.state.answer === '') {
-            this.setState({
-                options: [answer],
-                answer: answer
-            });
-            this.props.onSelection(answer);
-        }
+        this.setState({
+            options: [answer],
+            answer: answer
+        });
+        this.props.onSelection(answer);
     }
 
     render(){
@@ -22,7 +20,7 @@ class QuestionBox extends Component {
                 <div className="question">{this.props.question}</div>
                 {
                     this.state.options.map((option, index) => (
-                        <button key={index} className="answerBtn" onClick={ () => { this.setAnswer(option)} }> 
+                        <button key={index} className="answerBtn" onClick={ () => this.state.answer === '' ?  this.setAnswer(option) : null }> 
                             {option} 
                         </button> 
                     ))
