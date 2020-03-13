@@ -7,11 +7,13 @@ class QuestionBox extends Component {
     }
 
     setAnswer = (answer) => {
-        console.log('im setting answer')
-        this.setState({
-            options: [answer],
-            answer: answer
-        });
+        if(this.state.answer === '') {
+            this.setState({
+                options: [answer],
+                answer: answer
+            });
+            this.props.onSelection(answer);
+        }
     }
 
     render(){
@@ -19,16 +21,8 @@ class QuestionBox extends Component {
             <div className="questionBox">
                 <div className="question">{this.props.question}</div>
                 {
-                    this.state.answer === '' && this.state.options.map((option, index) => (
-                        <button key={index} className="answerBtn" onClick={ () => { this.setAnswer(option); this.props.onSelection(option) }}> 
-                            {option} 
-                        </button> 
-                    ))
-                    
-                }
-                {
-                    this.state.answer !== '' && this.state.options.map((option, index) => (
-                        <button key={index} className="answerBtn"> 
+                    this.state.options.map((option, index) => (
+                        <button key={index} className="answerBtn" onClick={ () => { this.setAnswer(option)} }> 
                             {option} 
                         </button> 
                     ))
