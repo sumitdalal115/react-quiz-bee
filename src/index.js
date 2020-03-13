@@ -58,13 +58,6 @@ class QuizBee extends Component {
             <div className="title">QuizBee 
                 <button className="resetBtn" onClick={this.resetGame}>Reset</button>
             </div>
-            {
-               // instead use react dev tools - profiler tab
-               console.log('\n')
-            }
-            {
-               console.log('running h4**********************************************************')
-            }
             { this.state.questionBank.length > 0 
             && this.state.attemptCount < 5 
             && this.state.questionBank.map(
