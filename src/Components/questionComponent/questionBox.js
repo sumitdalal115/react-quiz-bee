@@ -19,11 +19,20 @@ class QuestionBox extends Component {
             <div className="questionBox">
                 <div className="question">{this.props.question}</div>
                 {
-                    this.state.options.map((option, index) => (
+                    this.state.answer === '' && this.state.options.map((option, index) => (
                         <button key={index} className="answerBtn" onClick={ () => { this.setAnswer(option); this.props.onSelection(option) }}> 
                             {option} 
                         </button> 
                     ))
+                    
+                }
+                {
+                    this.state.answer !== '' && this.state.options.map((option, index) => (
+                        <button key={index} className="answerBtn"> 
+                            {option} 
+                        </button> 
+                    ))
+                    
                 }
             </div>
         );
