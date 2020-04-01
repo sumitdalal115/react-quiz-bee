@@ -25,20 +25,27 @@ class QuizBee extends Component {
         console.log('QuizBee: fetching questions');
         quizService().then(questions => {
             this.setState({
-                questionBank : questions
+                questionBank : questions.map(q => ({...q, answer : ""}))
             });
         });
     }
 
-    computeAnswer = (answer, correct) => {
+    computeAnswer = (questionId, answer, correct) => {
         let score = this.state.score;
         let attemptCount = this.state.attemptCount;
         if(answer === correct){
             ++score;
         }
+        let questions = this.state.questionBank.map(q => {
+            if(q.questionId !== questionId)
+                return q;
+            q.answer = answer;
+            return q;
+        });
         this.setState({
             score: score,
-            attemptCount: ++attemptCount
+            attemptCount: ++attemptCount,
+            questionBank: questions
         });
     }
 
@@ -47,13 +54,21 @@ class QuizBee extends Component {
         this.setState({
             score: 0,
             attemptCount: 0,
-            questionBank:[]
+            questionBank:[],
+            currentView: this.view.QUIZ
         });
         this.getQuestions();
     }
 
     loadTestView = () => {
         var newView = this.state.currentView === this.view.TEST ? this.view.QUIZ : this.view.TEST;
+        this.setState({
+            currentView:newView
+        }) 
+    }
+
+    loadStatusView = () => {
+        var newView = this.state.currentView === this.view.STATUS ? this.view.QUIZ : this.view.STATUS;
         this.setState({
             currentView:newView
         }) 
@@ -72,6 +87,7 @@ class QuizBee extends Component {
         return (
         <div className="container">
             <div className="title">QuizBee 
+                <button className="resetBtn" onClick={this.loadStatusView}>Toggle Status view</button>
                 <button className="resetBtn" onClick={this.loadTestView}>Toggle Test view</button>
                 <button className="resetBtn" onClick={this.resetGame}>Reset</button>
             </div>
@@ -80,12 +96,14 @@ class QuizBee extends Component {
                 && this.state.questionBank.length > 0 
                 && this.state.attemptCount < 5 
                 && this.state.questionBank.map(
-                ({question, answers, correct, questionId}) => 
+                ({question, answers, correct, questionId, answer}) => 
                     <QuestionBox question={question} 
                         options={answers} 
                         correct={correct} 
-                        key={questionId} 
-                        onSelection= {answer => this.computeAnswer(answer, correct)} /> 
+                        key={questionId}
+                        questionId={questionId}
+                        answer={answer} 
+                        onSelection= {(questionId, answer) => this.computeAnswer(questionId, answer, correct)} /> 
             )}
             {
                 this.state.currentView === this.view.QUIZ 
@@ -96,6 +114,12 @@ class QuizBee extends Component {
                this.state.currentView === this.view.TEST 
                && <div className="score-board">            
                     <div className="score">hi, this is test view!!</div>
+                </div>
+            }
+            {
+               this.state.currentView === this.view.STATUS 
+               && <div className="score-board">            
+                    <div className="score">Current status : <br/><br/><i>question attempted - {this.state.attemptCount}, score - {this.state.score}</i></div>
                 </div>
             }
         </div>
